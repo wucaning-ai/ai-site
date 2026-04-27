@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>初音AI · 聊天系统</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      font-family: "Microsoft YaHei", sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h2 {
+      color: #39c5bb;
+      text-shadow: 0 0 10px #39c5bb;
+    }
+
+    textarea {
+      width: 300px;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    select, button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border-radius: 10px;
+      border: none;
+      background: #39c5bb;
+      color: black;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2fa99f;
+      transform: scale(1.05);
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    /* 初音风小标签 */
+    .miku {
+      font-size: 12px;
+      color: #39c5bb;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>🎤 初音AI聊天系统</h2>
+<div class="miku">Miku Mode · Powered by AI</div>
+
+<textarea id="input" placeholder="说点什么..." rows="4"></textarea>
+<br>
+
+<select id="style">
+  <option>发疯</option>
+  <option>锐评</option>
+  <option>恋爱脑</option>
+  <option>鲁迅</option>
+  <option>孔子</option>
+  <option>王阳明</option>
+</select>
+
+<br>
+
+<button onclick="send()">🎶 发送</button>
+
+<p id="output"></p >
+
+<script>
+async function send() {
+  const text = document.getElementById("input").value;
+  const style = document.getElementById("style").value;
+
+  document.getElementById("output").innerText = "🎧 初音思考中...";
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt: text, style })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("output").innerText = "🎤 " + data.text;
+
+  } catch (e) {
+    document.getElementById("output").innerText = "❌ 请求失败";
+  }
+}
+</script>
+
+</body>
+</html>
