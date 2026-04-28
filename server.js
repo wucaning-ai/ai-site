@@ -19,7 +19,7 @@ const styles = {
   "王阳明": "用心学、内省、哲思的语气回答："
 };
 
-app.post("/api/chat", async (req, res) => {
+app.post("https://ai-site-19a0.onrender.com/api/chat", async (req, res) => {
   const { prompt, style } = req.body;
 
   const finalPrompt = (styles[style] || "") + prompt+"(请在200字以内回答";
@@ -60,9 +60,7 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("运行：http://localhost:3000");
-});
+console.log("API_KEY:", API_KEY);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
