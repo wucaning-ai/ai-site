@@ -82,7 +82,7 @@
 <script>
 async function send() {
   const text = document.getElementById("input").value;
-  const style = document.getElementById("style").value;
+  
 
   document.getElementById("output").innerText = "🎧 初音思考中...";
 
@@ -92,7 +92,7 @@ async function send() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ prompt: text, style })
+      body: JSON.stringify({ prompt: text })
     });
 
     const data = await res.json();
