@@ -1,13 +1,13 @@
 const express = require("express");
 const path = require("path");
-
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(cors());
 // 👉 换成你的阿里云 DashScope Key
-const API_KEY = "sk-b94172f7a46c40d2b748435c90a05d78";
+const API_KEY = process.env.DASHSCOPE_API_KEY;
 
 // 风格定义（保留你之前的）
 const styles = {

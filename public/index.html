@@ -94,7 +94,7 @@ async function send() {
   document.getElementById("output").innerText = "🎧 初音思考中...";
 
   try {
-    const res = await fetch("/api/chat", {
+    const res = await fetch("https://ai-site-19a0.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
